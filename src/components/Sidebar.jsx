@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function Sidebar(props) {
 
@@ -25,24 +26,24 @@ export default function Sidebar(props) {
         <div class="sidebar-wrapper h-full">
           <ul class="space-y-2">
             <li>
-              <a
+              <Link
                 onClick={onHRClick}
-                href="#"
+                to="/hr/reimbursement"
                 class="flex p-1 items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <i class="fa-solid fa-gauge"></i>
                 <p>HR</p>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 onClick={onFinanceClick}
-                href="#"
+                to="/finance/tax"
                 class="flex p-1 items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <i class="fa-solid fa-gauge"></i>
                 <p>Finance</p>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

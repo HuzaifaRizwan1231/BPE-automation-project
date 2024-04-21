@@ -52,9 +52,9 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-
-     <Sidebar isHRClicked={isHRClicked} setisHRClicked={setisHRClicked} isFinanceClicked={isFinanceClicked} setisFinanceClicked={setisFinanceClicked}/>
+      <Sidebar isHRClicked={isHRClicked} setisHRClicked={setisHRClicked} isFinanceClicked={isFinanceClicked} setisFinanceClicked={setisFinanceClicked}/>
      <SecondSidebar isHRClicked={isHRClicked} isFinanceClicked={isFinanceClicked}/>
+     
     </>
   );
 }

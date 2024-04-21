@@ -65,3 +65,53 @@
     max-width: 100%;
     padding: 4px 16px;
 }
+
+
+/* PAGES */
+
+.main{
+    padding-left: 250px !important;
+    background-color: #f6f6f9;
+    height: 100vh;
+}
+
+.main-wrapper{
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.page-content{
+    padding: 78px 12px 60px;
+}
+
+.page-header{
+    margin-bottom: 1.5rem;
+}
+
+.button{
+    padding: 8px 10px;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 7px !important;
+}
+
+.page-table{
+    font-size: 10px !important;
+    background-color: white;
+    color: black !important;
+    border-radius: 1rem;
+}
+
+.pagination{
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* REIMBURSEMENT.JSX */
+
+.reimbursement-button{
+    background-color: #4fb1e4;
+    color: white;
+}

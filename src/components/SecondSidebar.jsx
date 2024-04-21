@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function SecondSidebar(props) {
 
@@ -17,20 +18,20 @@ export default function SecondSidebar(props) {
             {isHRClicked && 
             <>
               <li>
-              <a
-                href="#"
+              <Link
+                to="hr/reimbursement"
                 class="flex p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <p>Reimbursement</p>
-              </a>
+              </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="hr/resource"
                   class="flex p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 >
                   <p>Resource Allocation</p>
-                </a>
+                </Link>
               </li>
             </>
             }
@@ -38,12 +39,12 @@ export default function SecondSidebar(props) {
             {isFinanceClicked && 
             <>
               <li>
-              <a
-                href="#"
+              <Link
+                to="/finance/tax"
                 class="flex p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <p>Tax Calculation</p>
-              </a>
+              </Link>
               </li>
             </>
             }
