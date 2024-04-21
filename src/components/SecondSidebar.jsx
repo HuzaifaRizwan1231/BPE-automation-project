@@ -1,6 +1,9 @@
 import React from 'react'
 
-export default function SecondSidebar() {
+export default function SecondSidebar(props) {
+
+  const {isHRClicked, isFinanceClicked} = props;
+
   return (
     <>
     <aside
@@ -10,22 +13,43 @@ export default function SecondSidebar() {
       >
         <div class="second-sidebar-wrapper h-full">
           <ul class="space-y-1">
-            <li>
+
+            {isHRClicked && 
+            <>
+              <li>
               <a
                 href="#"
                 class="flex p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <p>Reimbursement</p>
               </a>
-            </li>
-            <li>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="flex p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                >
+                  <p>Resource Allocation</p>
+                </a>
+              </li>
+            </>
+            }
+
+            {isFinanceClicked && 
+            <>
+              <li>
               <a
                 href="#"
                 class="flex p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                <p>Resource Allocation</p>
+                <p>Tax Calculation</p>
               </a>
-            </li>
+              </li>
+            </>
+            }
+
+
+            
           </ul>
         </div>
       </aside>

@@ -1,17 +1,16 @@
 import { useState } from 'react'
 import './App.css'
-import Dashboard from './pages/Dashboard'
 import Navbar from './components/Navbar'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      {/* TODO  */}
-      {/* <Dashboard/> */}
+      {/* <Router>
 
-      <Navbar/>
+      </Router> */}
+        <Navbar/>
 
 
     </>

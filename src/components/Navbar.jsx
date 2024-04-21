@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
 import SecondSidebar from "./SecondSidebar";
 
 export default function Navbar() {
+
+  //Defining varibles for dynamic sidebars
+  const [isHRClicked, setisHRClicked] = useState(true);
+  const [isFinanceClicked, setisFinanceClicked] = useState(false);
+
   return (
     <>
       <nav class="navbar shadow-md fixed top-0 z-50 w-full border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -48,8 +53,8 @@ export default function Navbar() {
         </div>
       </nav>
 
-     <Sidebar/>
-     <SecondSidebar/>
+     <Sidebar isHRClicked={isHRClicked} setisHRClicked={setisHRClicked} isFinanceClicked={isFinanceClicked} setisFinanceClicked={setisFinanceClicked}/>
+     <SecondSidebar isHRClicked={isHRClicked} isFinanceClicked={isFinanceClicked}/>
     </>
   );
 }

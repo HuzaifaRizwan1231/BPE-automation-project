@@ -1,6 +1,20 @@
 import React from 'react'
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+
+  const {isHRClicked, setisHRClicked, isFinanceClicked, setisFinanceClicked} = props;
+
+  //Functins for dynamic second sidebar
+  const onHRClick =()=>{
+    setisHRClicked(true);
+    setisFinanceClicked(false);
+  }
+
+  const onFinanceClick =()=>{
+    setisFinanceClicked(true);
+    setisHRClicked(false);
+  }
+  
   return (
     <>
      <aside
@@ -12,6 +26,7 @@ export default function Sidebar() {
           <ul class="space-y-2">
             <li>
               <a
+                onClick={onHRClick}
                 href="#"
                 class="flex p-1 items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -21,6 +36,7 @@ export default function Sidebar() {
             </li>
             <li>
               <a
+                onClick={onFinanceClick}
                 href="#"
                 class="flex p-1 items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
