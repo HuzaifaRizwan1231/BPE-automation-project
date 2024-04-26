@@ -53,7 +53,7 @@ export default function Navbar() {
         </div>
       </nav>
       <Sidebar isHRClicked={isHRClicked} setisHRClicked={setisHRClicked} isFinanceClicked={isFinanceClicked} setisFinanceClicked={setisFinanceClicked}/>
-     <SecondSidebar isHRClicked={isHRClicked} isFinanceClicked={isFinanceClicked}/>
+      <SecondSidebar isHRClicked={isHRClicked} isFinanceClicked={isFinanceClicked}/>
      
     </>
   );
