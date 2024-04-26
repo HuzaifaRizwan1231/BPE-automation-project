@@ -135,3 +135,21 @@
     background-color: #4fb1e4;
     color: white;
 }
+
+
+
+/* LOGIN.JSX */
+
+.login-form-wrapper{
+    padding-top: 20px;
+    width: 55%;
+    margin: auto;
+}
+
+.title{
+    font-size: 24px;
+}
+
+.tagline{
+    font-size: 12px;
+}
