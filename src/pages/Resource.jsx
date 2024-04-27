@@ -1,7 +1,9 @@
 import React from "react";
 import ResourceTable from "../components/ResourceTable";
 
-export default function Resource() {
+export default function Resource(props) {
+
+  const {ip} = props;
   return (
     <>
       <div className="main">
@@ -18,7 +20,7 @@ export default function Resource() {
               </button>
             </div>
             <div className="page-table">
-              <ResourceTable />
+              <ResourceTable ip={ip}/>
             </div>
           </div>
         </div>

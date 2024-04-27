@@ -104,6 +104,7 @@
 
 .page-content{
     padding: 78px 12px 60px;
+    height: 100vh;
 }
 
 .page-header{
@@ -140,16 +141,59 @@
 
 /* LOGIN.JSX */
 
+.login-page{
+    position: relative;
+    z-index: 100;
+}
+
+.login-image{
+    align-items: center;
+    background-color: #e9f7ff;
+    background-image: url(/src/images/welcome-screen.0dd881d5fe24979db289.png);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    padding: 5rem;
+}
+
+.login-main{
+    background-color: #0e111a;
+    color: white;
+}
+
 .login-form-wrapper{
-    padding-top: 20px;
-    width: 55%;
+    padding: 20px 0px;
+    width: 45%;
     margin: auto;
 }
 
+.login-form-wrapper-inside{
+    margin-bottom: 40px;
+}
+
 .title{
-    font-size: 24px;
+    font-size: 32px;
 }
 
 .tagline{
-    font-size: 12px;
+    font-size: 16px;
+}
+
+.login-input-group input{
+    height: 55px;
+    padding: 0px 16px;
+    margin-bottom: 1.5rem;
+}
+
+.forgot-pass{
+    font-size: 13px !important;
+    font-style: italic;
+}
+
+.extra-fields{
+    justify-content:space-between ;
+    font-size: 14px;
 }

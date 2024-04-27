@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import ReimbursementTable from '../components/ReimbursementTable'
 import NewReimbursement from '../components/NewReimbursement'
 
-export default function Reimbursement() {
+export default function Reimbursement(props) {
 
   const [showForm, setShowForm] = useState(false);
-  
+  const {ip} = props;
   return (
    
     <>
@@ -21,7 +21,7 @@ export default function Reimbursement() {
                   }}>+ Add Reimbursement</button>
                 </div>
                 <div className="page-table">
-                      <ReimbursementTable/>
+                      <ReimbursementTable ip={ip}/>
                 </div>
               </div>
           </div>

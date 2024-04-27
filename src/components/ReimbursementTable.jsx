@@ -1,9 +1,24 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
-export default function () {
+export default function (props) {
+
+    const {ip} = props;
+  const [reimbursements, setReimbursements] = useState([])
+
+
+  useEffect(() => {
+    // Fetching reimbursements data table
+      axios.get(`${ip}/reimbursements`)
+      .then((res)=>setReimbursements(res.data.result))
+      .catch((err)=>console.log(err))   
+  }, [])
+    
+
+    
+    
   return (
     <>
-        
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-left rtl:text-right">
@@ -16,46 +31,52 @@ export default function () {
                     </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Product name
+                    Reibursement ID
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Color
+                    Image
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Category
+                    Amount
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Price
+                    Employee ID
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Action
+                    Status
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b dark:border-gray-700 ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                        <input id="checkbox-table-search-1" type="checkbox" class="rounded"/>
-                        <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    Apple MacBook Pro 17"
-                </th>
-                <td class="px-6 py-4">
-                    Silver
-                </td>
-                <td class="px-6 py-4">
-                    Laptop
-                </td>
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
-            </tr>
+            {reimbursements.map((reimbursement)=>(
+
+                <tr key={reimbursement.reimbursementId} class="bg-white border-b dark:border-gray-700 ">
+                    <td class="w-4 p-4">
+                        <div class="flex items-center">
+                            <input id="checkbox-table-search-1" type="checkbox" class="rounded"/>
+                            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {reimbursement.reimbursementId}
+                    </th>
+                    <td class="px-6 py-4">
+                        {reimbursement.image}
+                    </td>
+                    <td class="px-6 py-4">
+                    {reimbursement.amount}
+                    </td>
+                    <td class="px-6 py-4">
+                    {reimbursement.employeeId}
+                    </td>
+                    <td class="px-6 py-4">
+                    {reimbursement.status}
+                    </td>
+                    {/* <td class="px-6 py-4">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td> */}
+                </tr>
+            ))}
        
         </tbody>
     </table>

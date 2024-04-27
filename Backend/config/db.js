@@ -23,13 +23,14 @@ const mysql = require('mysql')
 const db = mysql.createPool({
     waitForConnections : true,
     queueLimit :0,
-    host: "bdhhrxgqs6qmslfvvzxi-mysql.services.clever-cloud.com",
-    user: "ulidp2iek6ljjfif",
-    password: "uenHzc9R7wLrNe9S4inA",
-    database: "bdhhrxgqs6qmslfvvzxi",
+    host: "mysql-108e726a-huzaifa-a95e.d.aivencloud.com",
+    user: "avnadmin",
+    password: "AVNS_jGXuSgbPuvpR5YAL9TQ",
+    database: "BPE",
     debug    :  true,
     wait_timeout : 28800,
-    connect_timeout :10
+    connect_timeout :10,
+    port:11134
 })
 
 
