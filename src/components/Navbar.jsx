@@ -3,7 +3,9 @@ import Profile from "./Profile";
 import Sidebar from "./Sidebar";
 import SecondSidebar from "./SecondSidebar";
 
-export default function Navbar() {
+export default function Navbar(props) {
+
+  const {ip, isLogin, isAdminLogin}=props;
 
   //Defining varibles for dynamic sidebars
   const [isHRClicked, setisHRClicked] = useState(true);
@@ -52,8 +54,8 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-      <Sidebar isHRClicked={isHRClicked} setisHRClicked={setisHRClicked} isFinanceClicked={isFinanceClicked} setisFinanceClicked={setisFinanceClicked}/>
-      <SecondSidebar isHRClicked={isHRClicked} isFinanceClicked={isFinanceClicked}/>
+      <Sidebar isLogin={isLogin} isAdminLogin={isAdminLogin} isHRClicked={isHRClicked} setisHRClicked={setisHRClicked} isFinanceClicked={isFinanceClicked} setisFinanceClicked={setisFinanceClicked}/>
+      <SecondSidebar isLogin={isLogin} isAdminLogin={isAdminLogin} isHRClicked={isHRClicked} isFinanceClicked={isFinanceClicked}/>
      
     </>
   );

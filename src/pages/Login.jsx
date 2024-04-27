@@ -1,23 +1,20 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
 
   const navigate = useNavigate();
 
-  const {ip, setIsAdminLogin, setIsLogin}=props;
-
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {ip, setIsAdminLogin, setIsLogin, setUserName, setUserEmail, setPassword, userEmail, userName, password}=props;
 
   const handleLogin = (event)=>{
     event.preventDefault();
-    
+    console.log(userEmail, password)
     if (userEmail == "hrAdmin@gmail.com" && password=="admin123"){
       setUserName("HR Admin");
       setIsAdminLogin(true);
+      setIsLogin(false);
       navigate('/')
     }
     else{
@@ -31,7 +28,9 @@ export default function Login(props) {
         }
         else{
           setUserName(res.data.name)
-          navigate('/')
+          setIsLogin(true)
+          setIsAdminLogin(false)
+          navigate('/employee/reimbursement')
         }
       })
       .catch((err)=>console.log(err))

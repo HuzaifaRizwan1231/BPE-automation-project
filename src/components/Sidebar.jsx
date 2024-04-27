@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Sidebar(props) {
 
-  const {isHRClicked, setisHRClicked, isFinanceClicked, setisFinanceClicked} = props;
+  const {isHRClicked, setisHRClicked, isFinanceClicked, setisFinanceClicked, isLogin, isAdminLogin} = props;
 
   //Functins for dynamic second sidebar
   const onHRClick =()=>{
@@ -23,7 +23,22 @@ export default function Sidebar(props) {
         class="sidebar fixed top-0 left-0 z-40 h-screen transition-transform -translate-x-full  border-r border-gray-200 sm:translate-x-0 dark:border-gray-700"
         aria-label="Sidebar"
       >
-        <div class="sidebar-wrapper h-full">
+        {isLogin && <div class="sidebar-wrapper h-full">
+          <ul class="space-y-2">
+            <li>
+              <Link
+                onClick={onHRClick}
+                to="/employee/reimbursement"
+                class="flex p-1 items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M2 4.90909C1.1176 4.90909 0.4 4.17518 0.4 3.27273C0.4 2.37027 1.1176 1.63636 2 1.63636C2.8824 1.63636 3.6 2.37027 3.6 3.27273C3.6 4.17518 2.8824 4.90909 2 4.90909ZM2.708 5.18318C2.252 5.36318 1.748 5.36318 1.292 5.18318C1.176 5.13818 1.044 5.15455 0.94 5.22C0.652219 5.40372 0.414919 5.65937 0.250463 5.96283C0.0860065 6.26629 -0.000188734 6.60759 3.10292e-07 6.95455V8.59091C3.10292e-07 8.81591 0.18 9 0.4 9H2.4V6.95455C2.4 6.32045 2.564 5.70273 2.86 5.16273C2.808 5.15455 2.756 5.16273 2.708 5.18318ZM10 4.90909C10.8824 4.90909 11.6 4.17518 11.6 3.27273C11.6 2.37027 10.8824 1.63636 10 1.63636C9.1176 1.63636 8.4 2.37027 8.4 3.27273C8.4 4.17518 9.1176 4.90909 10 4.90909ZM11.06 5.22C10.956 5.15455 10.824 5.13818 10.708 5.18318C10.252 5.36318 9.748 5.36318 9.292 5.18318C9.24416 5.1621 9.19154 5.15502 9.14 5.16273C9.44052 5.70999 9.59889 6.32689 9.6 6.95455V9H11.6C11.82 9 12 8.81591 12 8.59091V6.95455C12 6.24682 11.648 5.60045 11.06 5.22ZM6 4.09091C4.8972 4.09091 4 3.17332 4 2.04545C4 0.917591 4.8972 0 6 0C7.1028 0 8 0.917591 8 2.04545C8 3.17332 7.1028 4.09091 6 4.09091ZM8.8 6.95455C8.7999 6.50466 8.69585 6.06117 8.49636 5.66021C8.29685 5.25925 8.00754 4.91218 7.652 4.64727C7.532 4.55727 7.372 4.545 7.24 4.61045C6.972 4.74955 6.688 4.83545 6.4 4.87636V6.95455C6.4 7.17955 6.22 7.36364 6 7.36364C5.78 7.36364 5.6 7.17955 5.6 6.95455V4.87636C5.312 4.83545 5.028 4.74955 4.76 4.61045C4.628 4.545 4.468 4.55727 4.348 4.64727C3.99246 4.91218 3.70315 5.25925 3.50365 5.66021C3.30415 6.06117 3.2001 6.50466 3.2 6.95455V9H8.8V6.95455Z" fill="#637381"></path></svg>
+                <p>Employee</p>
+              </Link>
+            </li>
+          </ul>
+        </div>}
+
+        {isAdminLogin && <div class="sidebar-wrapper h-full">
           <ul class="space-y-2">
             <li>
               <Link
@@ -46,7 +61,8 @@ export default function Sidebar(props) {
               </Link>
             </li>
           </ul>
-        </div>
+        </div>}
+        
       </aside>
     </>
   )
