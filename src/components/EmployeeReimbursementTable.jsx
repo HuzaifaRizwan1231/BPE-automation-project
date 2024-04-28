@@ -3,15 +3,10 @@ import React, { useEffect, useState } from 'react'
 
 export default function EmployeeReimbursementTable(props) {
 
-    const {ip, userId} = props;
-    const [reimbursements, setReimbursements] = useState([])
-  
+    const {ip, userId ,FetchReimbursements,reimbursements} = props;
   
     useEffect(() => {
-      // Fetching reimbursements data table
-        axios.post(`${ip}/employee_reimbursements`, {userId:userId})
-        .then((res)=>{setReimbursements(res.data.result), console.log(res.data)})
-        .catch((err)=>console.log(err))   
+        FetchReimbursements();
     }, [])
       
   
@@ -40,6 +35,12 @@ export default function EmployeeReimbursementTable(props) {
                       Amount
                   </th>
                   <th scope="col" class="px-6 py-3">
+                      Description
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Type
+                  </th>
+                  <th scope="col" class="px-6 py-3">
                       Employee ID
                   </th>
                   <th scope="col" class="px-6 py-3">
@@ -65,6 +66,12 @@ export default function EmployeeReimbursementTable(props) {
                       </td>
                       <td class="px-6 py-4">
                       {reimbursement.amount}
+                      </td>
+                      <td class="px-6 py-4">
+                      {reimbursement.description}
+                      </td>
+                      <td class="px-6 py-4">
+                      {reimbursement.type}
                       </td>
                       <td class="px-6 py-4">
                       {reimbursement.employeeId}

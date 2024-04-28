@@ -78,13 +78,13 @@ app.post("/employee_reimbursements", (req, res) => {
 
 // RAISE NEW REIMBURSEMENT APPLICATION
 app.post("/insert_reimbursement", (req, res) => {
-  const { reimbursementNo, amount, empId, status } = req.body;
+  const { image, amount, userId, status, type, description } = req.body;
   const insertQuery =
-    "INSERT INTO reimbursement (reimbursementNo, amount, empId, status) VALUES (?, ?, ?, ?)";
+    "INSERT INTO Reimbursement (image, amount, employeeId, status, type, description) VALUES (?, ?, ?, ?, ?, ?)";
 
   db.query(
     insertQuery,
-    [reimbursementNo, amount, empId, status],
+    [image, amount, userId, status, type, description],
     (err, result) => {
       if (err) {
         console.error("Error inserting reimbursement:", err);

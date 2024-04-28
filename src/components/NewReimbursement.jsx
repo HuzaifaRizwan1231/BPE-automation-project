@@ -1,26 +1,50 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
 export default function NewReimbursement(props) {
+
+  const {ip, userId,FetchReimbursements} = props;
+
+  const [image, setImage] = useState("test.png")
+  const [amount, setAmount] = useState(0)
+  const [type, setType] = useState("medical")
+  const [description, setDescription] = useState("")
+
+  
+  const raiseReimbursement = (event)=>{
+    event.preventDefault();
+
+    //RAISING NEW REIMBURSEMENT
+    axios.post(`${ip}/insert_reimbursement`, {image, amount, userId, status:"Pending", type, description})
+    .then((res)=>console.log(res.data))
+    .then(FetchReimbursements())
+  }
+
   return (
     <>
       <div className={`fixed-form ${props.showForm ? "block" : "hidden"}`}>
         <h6 class="form-title mb-4">New Reimbursement</h6>
         <div className="form-wrapper">
-          <form class="max-w-md mx-auto">
+          <form class="max-w-md mx-auto" onSubmit={raiseReimbursement}>
             <div class="relative z-0 w-full mb-5 group">
-            <select id="countries" class="rounded-lg block w-full p-2.5 border">
-            <option selected>Choose type</option>
-            <option value="gym">Gym</option>
-            <option value="medical">Medical</option>
-    
+
+            <select id="countries" class="rounded-lg block w-full p-2.5 border" onChange={(e)=>{
+              setType(e.target.value);
+            }}required>
+              <option value="medical"  selected >Medical</option>
+              <option value="gym" >Gym</option>  
             </select>
               
             </div>
             <div class="relative z-0 w-full mb-5 group">
-            <input type="number" id="first_name" class="rounded-lg block w-full p-2.5 border" placeholder="0" required />
+            <input onChange={(e)=>{
+              setAmount(e.target.value)
+            }} type="number" id="first_name" class="rounded-lg block w-full p-2.5 border" placeholder="0" required />
             </div>
             <div class="relative z-0 w-full mb-5 group">
-            <textarea type="text" id="large-input" placeholder="Description" class="rounded-lg block w-full p-2.5 border"/>
+            <textarea onChange={(e)=>{
+              setDescription(e.target.value)
+            }} type="text" id="large-input" placeholder="Description" class="rounded-lg block w-full p-2.5 border"/>
             </div>
             
             <div class="flex items-center justify-center mb-5 w-full">
@@ -39,15 +63,15 @@ export default function NewReimbursement(props) {
             <div className="flex gap-2 justify-end">
 
             
-            <button
+            <a
             onClick={() => {
                 props.setShowForm(false);
               }}
-              type="submit"
+              
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Cancel
-            </button>
+            </a>
             <button
               type="submit"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import NewReimbursement from '../components/NewReimbursement';
 import EmployeeReimbursementTable from '../components/EmployeeReimbursementTable';
+import axios from 'axios';
 
 export default function EmployeeReimbursement(props) {
  
   const [showForm, setShowForm] = useState(false);
   const {ip, userId, userEmail} = props;
    
+  const [reimbursements, setReimbursements] = useState([])
+    
+    const FetchReimbursements = ()=>{
+        // Fetching reimbursements data table
+        axios.post(`${ip}/employee_reimbursements`, {userId:userId})
+        .then((res)=>{setReimbursements(res.data.result), console.log(res.data)})
+        .catch((err)=>console.log(err))  
+    }
+
     return (
      
       <>
@@ -22,12 +32,12 @@ export default function EmployeeReimbursement(props) {
                     }}>+ Raise Reimbursement</button>
                   </div>
                   <div className="page-table">
-                        <EmployeeReimbursementTable userId={userId}  userEmail={userEmail} ip={ip}/>
+                        <EmployeeReimbursementTable FetchReimbursements={FetchReimbursements} reimbursements={reimbursements} userId={userId}  userEmail={userEmail} ip={ip}/>
                   </div>
                 </div>
             </div>
         </div>
-        <NewReimbursement showForm={showForm} setShowForm={setShowForm}/>
+        <NewReimbursement showForm={showForm} setShowForm={setShowForm} ip={ip} userId={userId} FetchReimbursements={FetchReimbursements}/>
       </>
     )
 }
