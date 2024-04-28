@@ -16,9 +16,9 @@ export default function Reimbursement(props) {
                   <div>
                       <h6><b>Reimbursement Management</b></h6>
                   </div>
-                  <button className="button reimbursement-button" onClick={()=>{
+                  {/* <button className="button reimbursement-button" onClick={()=>{
                     setShowForm(true);
-                  }}>+ Add Reimbursement</button>
+                  }}>+ Add Reimbursement</button> */}
                 </div>
                 <div className="page-table">
                       <ReimbursementTable ip={ip}/>
@@ -26,7 +26,7 @@ export default function Reimbursement(props) {
               </div>
           </div>
       </div>
-      <NewReimbursement showForm={showForm} setShowForm={setShowForm}/>
+      {/* <NewReimbursement showForm={showForm} setShowForm={setShowForm}/> */}
     </>
   )
 }

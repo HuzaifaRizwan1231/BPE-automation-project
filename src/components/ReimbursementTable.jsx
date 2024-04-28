@@ -6,14 +6,32 @@ export default function (props) {
     const {ip} = props;
   const [reimbursements, setReimbursements] = useState([])
 
+  const FetchReimbursementsForAdmin = ()=>{
+        // Fetching reimbursements data table
+        axios.get(`${ip}/reimbursements`)
+        .then((res)=>{console.log(res.data.result); setReimbursements(res.data.result)})
+        .catch((err)=>console.log(err))   
+  }
 
   useEffect(() => {
-    // Fetching reimbursements data table
-      axios.get(`${ip}/reimbursements`)
-      .then((res)=>setReimbursements(res.data.result))
-      .catch((err)=>console.log(err))   
+    FetchReimbursementsForAdmin();
   }, [])
-    
+
+  const approveReimbursement = (reimbursementId)=>{
+    updateReimbursements(reimbursementId, "Approved")
+  }
+
+  const rejectReimbursement = (reimbursementId)=>{
+    updateReimbursements(reimbursementId, "Rejected")
+  }
+
+  const updateReimbursements = async (reimbursementId, status)=>{
+    await axios.post(`${ip}/update_reimbursement`, {reimbursementId, status})
+      .then((res)=>console.log(res.data), FetchReimbursementsForAdmin())
+      .catch((err)=>console.log(err))   
+  }
+
+  
 
     
     
@@ -40,11 +58,18 @@ export default function (props) {
                     Amount
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Description
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Type
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Employee ID
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
                 </th>
+                
             </tr>
         </thead>
         <tbody>
@@ -67,14 +92,23 @@ export default function (props) {
                     {reimbursement.amount}
                     </td>
                     <td class="px-6 py-4">
+                    {reimbursement.description}
+                    </td>
+                    <td class="px-6 py-4">
+                    {reimbursement.type}
+                    </td>
+                    <td class="px-6 py-4">
                     {reimbursement.employeeId}
                     </td>
                     <td class="px-6 py-4">
                     {reimbursement.status}
                     </td>
-                    {/* <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td> */}
+                    <td class="px-6 py-4">
+                        <a onClick={()=>{approveReimbursement(reimbursement.reimbursementId)}}  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Approve</a>
+                    </td>
+                    <td class="px-6 py-4">
+                        <a onClick={()=>{rejectReimbursement(reimbursement.reimbursementId)}} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Reject</a>
+                    </td>
                 </tr>
             ))}
        

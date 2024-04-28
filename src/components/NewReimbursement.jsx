@@ -16,8 +16,7 @@ export default function NewReimbursement(props) {
 
     //RAISING NEW REIMBURSEMENT
     axios.post(`${ip}/insert_reimbursement`, {image, amount, userId, status:"Pending", type, description})
-    .then((res)=>console.log(res.data))
-    .then(FetchReimbursements())
+    .then((res)=>console.log(res.data), FetchReimbursements())
   }
 
   return (

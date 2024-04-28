@@ -98,17 +98,18 @@ app.post("/insert_reimbursement", (req, res) => {
 });
 
 // UPDATE REIMBURSEMENT STATUS
-app.post("/reimbursement/update", (req, res) => {
-  const reimbursementID = req.body.reimbursementNo;
+app.post("/update_reimbursement", (req, res) => {
+  const reimbursementId = req.body.reimbursementId;
   const status = req.body.status;
 
   db.query(
-    "UPDATE reimbursement SET status = ? WHERE reimbursementNo = ? ",
-    [status, reimbursementID],
+    "UPDATE Reimbursement SET status = ? WHERE reimbursementId = ? ",
+    [status, reimbursementId],
     (err, result) => {
       if (err) {
         return res.json("Error");
       } else {
+        console.log("Reimbursement updated successfully");
         res.json({ message: "REIMBURSEMENT updated successfully" });
       }
     }
