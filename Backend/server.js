@@ -116,16 +116,35 @@ app.post("/update_reimbursement", (req, res) => {
   );
 });
 
+// GET PROJECTS TO TRANSFER TO
+app.post("/projects", (req, res) => {
+  let exceptionId = req.body.exceptionId;
+  if(exceptionId==null){
+    exceptionId = "NULL"
+  }
+  db.query(
+    "SELECT * FROM Project WHERE projectId != ?",
+    [exceptionId],
+    (error, result) => {
+      if (error) {
+        return res.json(error);
+      } else {
+        return res.json({ result });
+      }
+    }
+  );
+});
+
 // UPDATE PROJECT OF EMPLOYEE
 app.put("/update_project", (req, res) => {
-  const empId = req.body.empId;
-  const projectId = req.body.projectId; // Assuming the project ID is provided in the request body
+  const eId = req.body.eId;
+  const transferToId = req.body.transferToId; // Assuming the project ID is provided in the request body
 
   // Query to update project ID of an employee
-  const sql = "UPDATE employee SET projectId = ? WHERE empId = ?";
+  const sql = "UPDATE employee SET projectId = ? WHERE employeeId = ?";
 
   // Execute query
-  db.query(sql, [projectId, empId], (err, result) => {
+  db.query(sql, [transferToId, eId], (err, result) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {

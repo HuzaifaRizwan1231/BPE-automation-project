@@ -5,16 +5,20 @@ import React, { useEffect, useState } from "react";
 export default function ResourceTable(props) {
 
   // USESTATES
-  const {ip} = props;
-  const [employees, setEmployees] = useState([])
-
+  const {ip, setShowForm ,setEId, setEName, setEProjectId, fetchProjects, fetchResources, employees} = props;
 
   useEffect(() => {
-    // Fetching reimbursements data table
-      axios.get(`${ip}/employee`)
-      .then((res)=>setEmployees(res.data.result))
-      .catch((err)=>console.log(err))   
+      fetchResources();  
   }, [])
+
+  
+  const openTransferResourceForm = async (id, name, projectId)=>{
+    await setEId(id);
+    await setEName(name);
+    await setEProjectId(projectId);
+    await setShowForm(true);
+    fetchProjects();
+  }
 
   return (
     <>
@@ -74,7 +78,7 @@ export default function ResourceTable(props) {
                     {employee.salary}
                     </td>
                     <td class="px-6 py-4">
-                    {employee.userName}
+                    {employee.userEmail}
                     </td>
                     <td class="px-6 py-4">
                     {employee.password}
@@ -88,9 +92,11 @@ export default function ResourceTable(props) {
                     <td class="px-6 py-4">
                     {employee.position}
                     </td>
-                    {/* <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td> */}
+                    <td class="px-6 py-4">
+                        <a onClick={()=>{
+                    openTransferResourceForm(employee.employeeId, employee.name, employee.projectId);
+                  }} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Transfer</a>
+                    </td>
                 </tr>
             ))}
        

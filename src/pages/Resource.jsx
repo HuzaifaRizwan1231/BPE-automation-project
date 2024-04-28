@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import ResourceTable from "../components/ResourceTable";
+import TransferResource from "../components/TransferResource";
+import axios from "axios";
 
 export default function Resource(props) {
 
+  const [showForm, setShowForm] = useState(false);
   const {ip} = props;
+
+
+  const [eId, setEId] = useState()
+  const [eName, setEName] = useState("");
+  const [eProjectId, setEProjectId] = useState()
+  const [projects, setProjects] = useState([])
+  const [employees, setEmployees] = useState([])
+
+
+  const fetchResources = ()=>{
+    // Fetching reimbursements data table
+      axios.get(`${ip}/employee`)
+      .then((res)=>setEmployees(res.data.result))
+      .catch((err)=>console.log(err)) 
+  }
+
+
+  const fetchProjects = ()=>{
+    axios.post(`${ip}/projects`, {exceptionId:eProjectId})
+    .then((res)=>{console.log(res.data.result); setProjects(res.data.result)})
+    .catch((err)=>console.log(err))
+}
+
   return (
     <>
       <div className="main">
@@ -15,16 +41,20 @@ export default function Resource(props) {
                   <b>Resource Allocation</b>
                 </h6>
               </div>
-              <button className="button reimbursement-button">
+              {/* <button className="button reimbursement-button" onClick={()=>{
+                    setShowForm(true);
+                  }}>
                 + Add Resource
-              </button>
+              </button> */}
             </div>
             <div className="page-table">
-              <ResourceTable ip={ip}/>
+              <ResourceTable ip={ip} setShowForm={setShowForm} setEId={setEId} setEName={setEName} setEProjectId={setEProjectId} fetchProjects={fetchProjects} fetchResources={fetchResources} employees={employees}/>
             </div>
           </div>
         </div>
       </div>
+
+      <TransferResource fetchResources={fetchResources} projects={projects} eId={eId} eName={eName} eProjectId={eProjectId} showForm={showForm} setShowForm={setShowForm} ip={ip}/>
     </>
   );
 }
