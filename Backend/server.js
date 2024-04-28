@@ -15,30 +15,24 @@ app.use(express.json());
 
 //LOGIN
 app.post("/login", (req, res) => {
-
-    const userEmail = req.body.userEmail;
-    const password = req.body.password;
-    let numOfRows;    
-
-   
-
-    
-      db.query("SELECT * FROM employee WHERE userName = ? AND password = ?", [userEmail,password], (err,result)=>{
-          numOfRows = result.length;
-          console.log(numOfRows)
-          if(err) {
-              return (res.json("Error")) ;
-          } 
-          else if(numOfRows==1){
-              res.json({data : result});
-          }
-          else {
-             return res.json("Incorrect Email or Password")
-          }
+  const userEmail = req.body.userEmail;
+  const password = req.body.password;
+  let numOfRows;
+  db.query(
+    "SELECT * FROM employee WHERE userEmail = ? AND password = ?",
+    [userEmail, password],
+    (err, result) => {
+      numOfRows = result.length;
+      console.log(numOfRows);
+      if (err) {
+        return res.json("Error");
+      } else if (numOfRows == 1) {
+        res.json({ data: result });
+      } else {
+        return res.json("Incorrect Email or Password");
       }
-      )  
-    
-  
+    }
+  );
 });
 
 //GET EMPLOYEE DATA
@@ -56,6 +50,22 @@ app.get("/employee", (req, res) => {
 app.get("/reimbursements", (req, res) => {
   db.query(
     "SELECT * FROM Reimbursement WHERE status = 'Pending' ORDER BY amount desc",
+    (error, result) => {
+      if (error) {
+        return res.json(error);
+      } else {
+        return res.json({ result });
+      }
+    }
+  );
+});
+
+// GET EMPLOYEE REIMBURSEMENTS
+app.post("/employee_reimbursements", (req, res) => {
+  const  userId = req.body.userId;
+  db.query(
+    "SELECT * FROM Reimbursement WHERE employeeId = ? ORDER BY status",
+    [userId],
     (error, result) => {
       if (error) {
         return res.json(error);

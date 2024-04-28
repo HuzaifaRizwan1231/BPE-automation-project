@@ -6,11 +6,11 @@ export default function Login(props) {
 
   const navigate = useNavigate();
 
-  const {ip, setIsAdminLogin, setIsLogin, setUserName, setUserEmail, setPassword, userEmail, userName, password}=props;
+  const {ip, setUserId, userId, setIsAdminLogin, setIsLogin, setUserName, setUserEmail, setPassword, userEmail, userName, password}=props;
 
   const handleLogin = (event)=>{
     event.preventDefault();
-    console.log(userEmail, password)
+    
     if (userEmail == "hrAdmin@gmail.com" && password=="admin123"){
       setUserName("HR Admin");
       setIsAdminLogin(true);
@@ -27,7 +27,8 @@ export default function Login(props) {
           console.log(res.data)
         }
         else{
-          setUserName(res.data.name)
+          setUserId(res.data.data[0].employeeId)
+          setUserName(res.data.data[0].name)
           setIsLogin(true)
           setIsAdminLogin(false)
           navigate('/employee/reimbursement')

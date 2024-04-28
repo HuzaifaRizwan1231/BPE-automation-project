@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import ReimbursementTable from '../components/ReimbursementTable';
+import React, { useEffect, useState } from 'react'
 import NewReimbursement from '../components/NewReimbursement';
+import EmployeeReimbursementTable from '../components/EmployeeReimbursementTable';
 
 export default function EmployeeReimbursement(props) {
-    const [showForm, setShowForm] = useState(false);
-    const {ip} = props;
+ 
+  const [showForm, setShowForm] = useState(false);
+  const {ip, userId, userEmail} = props;
+   
     return (
      
       <>
@@ -20,7 +22,7 @@ export default function EmployeeReimbursement(props) {
                     }}>+ Raise Reimbursement</button>
                   </div>
                   <div className="page-table">
-                        <ReimbursementTable ip={ip}/>
+                        <EmployeeReimbursementTable userId={userId}  userEmail={userEmail} ip={ip}/>
                   </div>
                 </div>
             </div>
