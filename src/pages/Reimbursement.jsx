@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReimbursementTable from '../components/ReimbursementTable'
 import NewReimbursement from '../components/NewReimbursement'
+import { useNavigate } from 'react-router-dom';
 
 export default function Reimbursement(props) {
 
   const [showForm, setShowForm] = useState(false);
-  const {ip} = props;
+  const {ip, userEmail} = props;
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userEmail == ""){
+      navigate("/auth/login")
+    }       
+  }, [])
+  
   return (
    
     <>

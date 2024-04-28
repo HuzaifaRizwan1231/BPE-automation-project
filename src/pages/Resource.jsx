@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ResourceTable from "../components/ResourceTable";
 import TransferResource from "../components/TransferResource";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Resource(props) {
 
   const [showForm, setShowForm] = useState(false);
-  const {ip} = props;
+  const {ip, userEmail} = props;
 
 
   const [eId, setEId] = useState()
@@ -15,6 +16,12 @@ export default function Resource(props) {
   const [projects, setProjects] = useState([])
   const [employees, setEmployees] = useState([])
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userEmail == ""){
+      navigate("/auth/login")
+    }       
+  }, [])
 
   const fetchResources = ()=>{
     // Fetching reimbursements data table

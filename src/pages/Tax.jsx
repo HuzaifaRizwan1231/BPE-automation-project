@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TaxTable from '../components/TaxTable'
+import { useNavigate } from 'react-router-dom';
 
-export default function Tax() {
+export default function Tax(props) {
+  
+  const {userEmail}=props;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userEmail == ""){
+      navigate("/auth/login")
+    }       
+  }, [])
   return (
     <>
       <div className="main">

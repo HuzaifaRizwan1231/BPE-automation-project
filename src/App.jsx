@@ -20,6 +20,8 @@ function App() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
+
   return (
     <>
       <Router>
@@ -34,7 +36,7 @@ function App() {
 
         <Route
             path="/hr/reimbursement"
-            element={<Reimbursement ip={ip}/>}
+            element={<Reimbursement ip={ip} userEmail={userEmail}/>}
         />
 
         <Route
@@ -44,12 +46,12 @@ function App() {
 
         <Route
             path="/hr/resource"
-            element={<Resource ip={ip}/>}
+            element={<Resource ip={ip} userEmail={userEmail}/>}
         />
 
         <Route
             path="/finance/tax"
-            element={<Tax ip={ip}/>}
+            element={<Tax ip={ip} userEmail={userEmail}/>}
         />
         </Routes>
 

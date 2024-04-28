@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import NewReimbursement from '../components/NewReimbursement';
 import EmployeeReimbursementTable from '../components/EmployeeReimbursementTable';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function EmployeeReimbursement(props) {
  
   const [showForm, setShowForm] = useState(false);
   const {ip, userId, userEmail} = props;
-   
+  const navigate = useNavigate();
+
   const [reimbursements, setReimbursements] = useState([])
     
     const FetchReimbursements = ()=>{
@@ -16,6 +18,13 @@ export default function EmployeeReimbursement(props) {
         .then((res)=>{setReimbursements(res.data.result), console.log(res.data)})
         .catch((err)=>console.log(err))  
     }
+
+    useEffect(() => {
+      if (userEmail == ""){
+        navigate("/auth/login")
+      }      
+    }, [])
+    
 
     return (
      
