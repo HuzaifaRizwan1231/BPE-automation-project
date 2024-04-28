@@ -121,8 +121,12 @@
     border-radius: 7px !important;
 }
 
+.page-title{
+    font-size: 20px;
+}
+
 .page-table{
-    font-size: 10px !important;
+    font-size: 13px !important;
     background-color: white;
     color: black !important;
     border-radius: 1rem;
@@ -138,6 +142,10 @@
 .reimbursement-button{
     background-color: #4fb1e4;
     color: white;
+    padding: 8px 10px;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 7px !important;
 }
 
 
@@ -200,3 +208,41 @@
     justify-content:space-between ;
     font-size: 14px;
 }
+
+
+/* TRANSFER RESOURCE */
+
+.transfer-form-wrapper{
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: wrap;
+    row-gap: 1rem;
+    padding-left: 4px;
+}
+
+.transfer-tag{
+    margin: 0px;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    font-family: "DM Sans" !important;
+    color: rgb(137, 137, 137) !important;
+    font-weight: 500 !important;
+}
+
+.transfer-value{
+    margin: 0px;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    word-break: break-word;
+    font-family: "DM Sans" !important;
+    color: rgb(33, 33, 33) !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+}
+
+.transfer-project-field{
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+

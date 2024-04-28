@@ -18,7 +18,7 @@ export default function Tax(props) {
           <div className="page-content">
             <div className="page-header flex items-center justify-between">
               <div>
-                <h6>
+                <h6 className="page-title">
                   <b>Tax Calculation</b>
                 </h6>
               </div>

@@ -6,18 +6,6 @@ export default function TaxTable() {
         <table class="w-full text-left rtl:text-right">
           <thead class="text-gray-700 bg-gray-50">
             <tr>
-              <th scope="col" class="p-4">
-                <div class="flex items-center">
-                  <input
-                    id="checkbox-all-search"
-                    type="checkbox"
-                    class="rounded"
-                  />
-                  <label for="checkbox-all-search" class="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </th>
               <th scope="col" class="px-6 py-3">
                 Product name
               </th>
@@ -37,18 +25,6 @@ export default function TaxTable() {
           </thead>
           <tbody>
             <tr class="bg-white border-b dark:border-gray-700 ">
-              <td class="w-4 p-4">
-                <div class="flex items-center">
-                  <input
-                    id="checkbox-table-search-1"
-                    type="checkbox"
-                    class="rounded"
-                  />
-                  <label for="checkbox-table-search-1" class="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
               <th
                 scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"

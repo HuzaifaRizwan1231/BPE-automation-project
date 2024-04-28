@@ -44,7 +44,7 @@ export default function Resource(props) {
           <div className="page-content">
             <div className="page-header flex items-center justify-between">
               <div>
-                <h6>
+                <h6 className="page-title">
                   <b>Resource Allocation</b>
                 </h6>
               </div>

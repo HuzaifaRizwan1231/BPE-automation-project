@@ -23,7 +23,7 @@ export default function Reimbursement(props) {
               <div className="page-content">
                 <div className="page-header flex items-center justify-between">
                   <div>
-                      <h6><b>Reimbursement Management</b></h6>
+                      <h6 className="page-title"><b>Reimbursement Management</b></h6>
                   </div>
                   {/* <button className="button reimbursement-button" onClick={()=>{
                     setShowForm(true);

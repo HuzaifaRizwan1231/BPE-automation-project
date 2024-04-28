@@ -22,7 +22,7 @@ export default function NewReimbursement(props) {
   return (
     <>
       <div className={`fixed-form ${props.showForm ? "block" : "hidden"}`}>
-        <h6 class="form-title mb-4">New Reimbursement</h6>
+        <h6 class="form-title mb-4 font-bold">New Reimbursement</h6>
         <div className="form-wrapper">
           <form class="max-w-md mx-auto" onSubmit={raiseReimbursement}>
             <div class="relative z-0 w-full mb-5 group">
