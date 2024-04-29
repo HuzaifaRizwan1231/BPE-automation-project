@@ -3,34 +3,21 @@ import React, { useEffect, useState } from 'react'
 
 export default function (props) {
 
-    const {ip} = props;
-  const [reimbursements, setReimbursements] = useState([])
+    const {ip, setShowForm, FetchReimbursementsForAdmin, reimbursements, setReimbursementId, setReimbursementAmount, setReimbursementType, setEmployeeId, setImage, setDescription} = props;
+  
+    useEffect(() => {
+        FetchReimbursementsForAdmin();
+      }, [])
 
-  const FetchReimbursementsForAdmin = ()=>{
-        // Fetching reimbursements data table
-        axios.get(`${ip}/reimbursements`)
-        .then((res)=>{console.log(res.data.result); setReimbursements(res.data.result)})
-        .catch((err)=>console.log(err))   
-  }
-
-  useEffect(() => {
-    FetchReimbursementsForAdmin();
-  }, [])
-
-  const approveReimbursement = (reimbursementId)=>{
-    updateReimbursements(reimbursementId, "Approved")
-  }
-
-  const rejectReimbursement = (reimbursementId)=>{
-    updateReimbursements(reimbursementId, "Rejected")
-  }
-
-  const updateReimbursements = async (reimbursementId, status)=>{
-    await axios.post(`${ip}/update_reimbursement`, {reimbursementId, status})
-      .then((res)=>console.log(res.data), FetchReimbursementsForAdmin())
-      .catch((err)=>console.log(err))   
-  }
-
+      const openReimbursementDetails=async(id, amount, type, eId, description, image)=>{
+          await setReimbursementId(id);
+          await setReimbursementAmount(amount);
+          await setReimbursementType(type);
+          await setEmployeeId(eId);
+          await setImage(image);
+          await setDescription(description);
+          setShowForm(true);
+      }
   
 
     
@@ -92,11 +79,9 @@ export default function (props) {
                     {reimbursement.status}
                     </td>
                     <td class="px-6 py-4">
-                        <a onClick={()=>{approveReimbursement(reimbursement.reimbursementId)}}  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Approve</a>
+                        <a onClick={()=>openReimbursementDetails(reimbursement.reimbursementId, reimbursement.amount, reimbursement.type, reimbursement.employeeId, reimbursement.description, reimbursement.image)}  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
                     </td>
-                    <td class="px-6 py-4">
-                        <a onClick={()=>{rejectReimbursement(reimbursement.reimbursementId)}} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Reject</a>
-                    </td>
+
                 </tr>
             ))}
        

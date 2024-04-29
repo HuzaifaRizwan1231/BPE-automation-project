@@ -28,6 +28,11 @@ function App() {
         <Navbar userName={userName} isLogin={isLogin} isAdminLogin={isAdminLogin}/>
         <Routes>
 
+        {/* <Route
+            path="/"
+            element={<Login ip={ip} userId={userId} userName={userName} userEmail={userEmail} setPassword={setPassword} password={password} setUserEmail={setUserEmail} setUserName={setUserName} setIsAdminLogin={setIsAdminLogin} setIsLogin={setIsLogin} setUserId={setUserId}/>}
+        /> */}
+
         <Route
             path="/auth/login"
             element={<Login ip={ip} userId={userId} userName={userName} userEmail={userEmail} setPassword={setPassword} password={password} setUserEmail={setUserEmail} setUserName={setUserName} setIsAdminLogin={setIsAdminLogin} setIsLogin={setIsLogin} setUserId={setUserId}/>}
