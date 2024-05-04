@@ -246,3 +246,13 @@
     font-size: 1rem;
 }
 
+.reimbursement-exceeded{
+    margin: 0px;
+    font-size: 0.8rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    font-family: "DM Sans" !important;
+    color: red !important;
+    font-weight: 500 !important;
+}
+

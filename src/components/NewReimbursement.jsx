@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 export default function NewReimbursement(props) {
 
@@ -9,6 +9,7 @@ export default function NewReimbursement(props) {
   const [amount, setAmount] = useState(0)
   const [type, setType] = useState("medical")
   const [description, setDescription] = useState("")
+  const fileRef = useRef();
 
   
   const raiseReimbursement = (event)=>{
@@ -57,7 +58,7 @@ export default function NewReimbursement(props) {
             <div class="relative z-0 w-full mb-5 group">
             <textarea onChange={(e)=>{
               setDescription(e.target.value)
-            }} type="text" id="large-input" placeholder="Description" class="rounded-lg block w-full p-2.5 border"/>
+            }} type="text" id="large-input" required placeholder="Description" class="rounded-lg block w-full p-2.5 border"/>
             </div>
             
             <div class="flex items-center justify-center mb-5 w-full">
@@ -68,11 +69,13 @@ export default function NewReimbursement(props) {
                         </svg>
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                        <p class={`text-sm mt-2 font-semibold ${file == null ? "text-red-500 dark:text-red-400" : "text-gray-500 dark:text-gray-400" }`}>{file == null ? "Please Select A File": file.name}</p>
+
                     </div>
-                    <input onChange={(e)=>{
+                    <input ref={fileRef} onChange={(e)=>{
                               setfile(e.target.files[0])
                           }}
-                    id="dropzone-file" type="file" class="" />
+                    id="dropzone-file" type="file" class="hidden" required/>
                 </label>
             </div> 
 

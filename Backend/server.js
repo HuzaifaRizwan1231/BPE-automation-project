@@ -52,7 +52,7 @@ app.get("/employee", (req, res) => {
 // GET PENDING REIMBURSEMENTS
 app.get("/reimbursements", (req, res) => {
   db.query(
-    "SELECT * FROM Reimbursement WHERE status = 'Pending' ORDER BY amount desc",
+    "SELECT * FROM Reimbursement JOIN employee ON employee.employeeId = Reimbursement.employeeId WHERE status = 'Pending' ORDER BY amount desc",
     (error, result) => {
       if (error) {
         return res.json(error);

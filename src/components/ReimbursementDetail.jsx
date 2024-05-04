@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 export default function ReimbursementDetail(props) {
 
-    const {ip, showForm, setShowForm, approveReimbursement, rejectReimbursement ,reimbursementId ,reimbursementAmount, reimbursementType, employeeId, image, description} = props;
+    const {ip, showForm, setShowForm, approveReimbursement, rejectReimbursement ,reimbursementId ,reimbursementAmount, reimbursementType, employeeId, image, description, employeeName, remainingAmount} = props;
   return (
     <>
        <div className={`fixed-form ${showForm ? "block" : "hidden"}`}>
@@ -12,11 +12,6 @@ export default function ReimbursementDetail(props) {
             <div className="w-1/2">
             <h6 class="transfer-tag mb-2">Reimbursement ID</h6>
             <h6 class="transfer-value mb-2">{reimbursementId}</h6>
-
-            </div>
-            <div className="w-1/2">
-            <h6 class="transfer-tag mb-2">Amount</h6>
-            <h6 class="transfer-value mb-2">{reimbursementAmount}</h6>
 
             </div>
             <div className="w-1/2">
@@ -30,15 +25,40 @@ export default function ReimbursementDetail(props) {
 
             </div>
             <div className="w-1/2">
+                <h6 class="transfer-tag mb-2">Name</h6>
+                <h6 class="transfer-value mb-2">{employeeName}</h6>
+
+            </div>
+            <div className="w-1/2">
+            <h6 class="transfer-tag mb-2">Amount</h6>
+            <h6 class="transfer-value mb-2">{reimbursementAmount}</h6>
+
+            </div>
+           
+           
+            <div className="w-1/2">
                 <h6 class="transfer-tag mb-2">Description</h6>
                 <h6 class="transfer-value mb-2">{description}</h6>
 
             </div>
-            <div className="w-1/2">
+            <div className="w-full">
                 <h6 class="transfer-tag mb-2">Image</h6>
-                <h6 class="transfer-value mb-2">{image}</h6>
+                {/* <h6 class="transfer-value mb-2">{image}</h6> */}
+                <img className="mx-auto mt-5  w-75" src={`/src/images/ReimbursementImages/${image}`} alt="hello" />
 
             </div>
+            <div className="w-1/2">
+                <h6 class="transfer-tag mb-2">Remaining Reimbursement</h6>
+                <h6 class="transfer-value mb-2">{remainingAmount}</h6>
+
+            </div>
+
+            {(reimbursementAmount>remainingAmount) && 
+              <div className="w-full mt-4">
+                <h6 class="reimbursement-exceeded mb-2">* Reimbursement Amount Exceeded</h6>
+              </div>
+            }
+           
             <div className="w-full">
 
             {/* <h6 class="transfer-tag">Employee ID</h6> */}
@@ -69,6 +89,7 @@ export default function ReimbursementDetail(props) {
               Cancel
             </a>
             <a
+            disabled
               onClick={() => {
                 rejectReimbursement(reimbursementId);
               }}
@@ -76,14 +97,25 @@ export default function ReimbursementDetail(props) {
             >
               Reject
             </a>
-            <a
-              onClick={() => {
-                approveReimbursement(reimbursementId);
-              }}
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Approve
-            </a>
+            {reimbursementAmount > remainingAmount ?
+            <>
+             <a
+                class="text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg px-5 py-2.5 text-center"
+              >
+                Approve
+              </a>
+            </>
+            :
+            <>
+              <a
+                onClick={() => {
+                  approveReimbursement(reimbursementId);
+                }}
+                class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Approve
+              </a>
+            </> }
             </div>
           </form>
             </div>

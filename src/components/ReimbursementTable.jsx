@@ -3,19 +3,21 @@ import React, { useEffect, useState } from 'react'
 
 export default function (props) {
 
-    const {ip, setShowForm, FetchReimbursementsForAdmin, reimbursements, setReimbursementId, setReimbursementAmount, setReimbursementType, setEmployeeId, setImage, setDescription} = props;
+    const {ip, setShowForm, FetchReimbursementsForAdmin, reimbursements, setReimbursementId, setReimbursementAmount, setReimbursementType, setEmployeeId, setImage, setDescription, setEmployeeName, setRemainingAmount} = props;
   
     useEffect(() => {
         FetchReimbursementsForAdmin();
       }, [])
 
-      const openReimbursementDetails=async(id, amount, type, eId, description, image)=>{
+      const openReimbursementDetails=async(id, amount, type, eId, description, image, name, remainingAmount)=>{
           await setReimbursementId(id);
           await setReimbursementAmount(amount);
           await setReimbursementType(type);
           await setEmployeeId(eId);
           await setImage(image);
           await setDescription(description);
+          await setEmployeeName(name);
+          await setRemainingAmount(remainingAmount);
           setShowForm(true);
       }
   
@@ -79,7 +81,7 @@ export default function (props) {
                     {reimbursement.status}
                     </td>
                     <td class="px-6 py-4">
-                        <a onClick={()=>openReimbursementDetails(reimbursement.reimbursementId, reimbursement.amount, reimbursement.type, reimbursement.employeeId, reimbursement.description, reimbursement.image)}  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
+                        <a onClick={()=>openReimbursementDetails(reimbursement.reimbursementId, reimbursement.amount, reimbursement.type, reimbursement.employeeId, reimbursement.description, reimbursement.image, reimbursement.name, reimbursement.reimbursementAmount)}  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
                     </td>
 
                 </tr>

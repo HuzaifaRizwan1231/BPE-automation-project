@@ -17,6 +17,8 @@ export default function Reimbursement(props) {
   const [employeeId, setEmployeeId] = useState()
   const [description, setDescription] = useState()
   const [image, setImage] = useState()
+  const [employeeName, setEmployeeName] = useState()
+  const [remainingAmount, setRemainingAmount] = useState()
 
   const FetchReimbursementsForAdmin = ()=>{
         // Fetching reimbursements data table
@@ -62,12 +64,12 @@ export default function Reimbursement(props) {
                   }}>+ Add Reimbursement</button> */}
                 </div>
                 <div className="page-table">
-                      <ReimbursementTable setReimbursementId={setReimbursementId} setReimbursementAmount={setReimbursementAmount} setReimbursementType={setReimbursementType} setEmployeeId={setEmployeeId} setImage={setImage} setDescription={setDescription} reimbursements={reimbursements} FetchReimbursementsForAdmin={FetchReimbursementsForAdmin} ip={ip} setShowForm={setShowForm}/>
+                      <ReimbursementTable setRemainingAmount={setRemainingAmount}  setEmployeeName={setEmployeeName} setReimbursementId={setReimbursementId} setReimbursementAmount={setReimbursementAmount} setReimbursementType={setReimbursementType} setEmployeeId={setEmployeeId} setImage={setImage} setDescription={setDescription} reimbursements={reimbursements} FetchReimbursementsForAdmin={FetchReimbursementsForAdmin} ip={ip} setShowForm={setShowForm}/>
                 </div>
               </div>
           </div>
       </div>
-      <ReimbursementDetail reimbursementId={reimbursementId} reimbursementAmount={reimbursementAmount} reimbursementType={reimbursementType} employeeId={employeeId} image={image} description={description} showForm={showForm} setShowForm={setShowForm} approveReimbursement={approveReimbursement} rejectReimbursement={rejectReimbursement}/>
+      <ReimbursementDetail remainingAmount={remainingAmount} employeeName={employeeName} reimbursementId={reimbursementId} reimbursementAmount={reimbursementAmount} reimbursementType={reimbursementType} employeeId={employeeId} image={image} description={description} showForm={showForm} setShowForm={setShowForm} approveReimbursement={approveReimbursement} rejectReimbursement={rejectReimbursement}/>
     </>
   )
 }
