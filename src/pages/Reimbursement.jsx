@@ -27,8 +27,13 @@ export default function Reimbursement(props) {
         .catch((err)=>console.log(err))   
   }
 
-  const approveReimbursement = (reimbursementId)=>{
+  const approveReimbursement = (reimbursementId, userId, minusAmount)=>{
     updateReimbursements(reimbursementId, "Approved")
+
+    // Update remaining amount of employee for reimbursement
+    axios.post(`${ip}/update_employee_remaining_amount`, {userId, minusAmount})
+    .then((res)=>{console.log(res.data);})
+    .catch((err)=>console.log(err)) 
   }
 
   const rejectReimbursement = (reimbursementId)=>{

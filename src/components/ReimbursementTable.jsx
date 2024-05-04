@@ -35,9 +35,6 @@ export default function (props) {
                     Reibursement ID
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Image
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Amount
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -62,9 +59,6 @@ export default function (props) {
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {reimbursement.reimbursementId}
                     </th>
-                    <td class="px-6 py-4">
-                        {reimbursement.image}
-                    </td>
                     <td class="px-6 py-4">
                     {reimbursement.amount}
                     </td>

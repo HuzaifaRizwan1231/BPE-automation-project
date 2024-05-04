@@ -49,6 +49,23 @@ app.get("/employee", (req, res) => {
   });
 });
 
+// UPDATE EMPLOYEE REIMBURSEMENT AMOUNT
+app.post("/update_employee_remaining_amount", (req, res) => {
+  const userId = req.body.userId;
+  const minusAmount = req.body.minusAmount;
+  db.query(
+    "UPDATE employee SET employee.reimbursementAmount = employee.reimbursementAmount - ? WHERE employee.employeeId = ?",
+    [minusAmount, userId],
+    (error, result) => {
+      if (error) {
+        return res.json(error);
+      } else {
+        return res.json({ result });
+      }
+    }
+  );
+});
+
 // GET EMPLOYEE WITH PROJECTS
 app.get("/employee_projects", (req, res) => {
   db.query(
