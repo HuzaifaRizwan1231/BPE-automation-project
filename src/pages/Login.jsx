@@ -9,10 +9,17 @@ export default function Login(props) {
   const {ip, setUserId, userId, setIsAdminLogin, setIsLogin, setUserName, setUserEmail, setPassword, userEmail, userName, password}=props;
 
   const handleLogin = (event)=>{
+    localStorage.clear();
     event.preventDefault();
     
     if (userEmail == "hrAdmin@gmail.com" && password=="admin123"){
+      localStorage.setItem('isAdminLogin', 'true');
+      localStorage.setItem('userName', 'HR Admin');
+      localStorage.setItem('userEmail', 'hrAdmin@gmail.com');
+      localStorage.setItem('password', 'admin123');
       setUserName("HR Admin");
+      setUserEmail("hrAdmin@gmail.com");
+      setPassword("admin123");
       setIsAdminLogin(true);
       setIsLogin(false);
       navigate('/')
@@ -31,6 +38,11 @@ export default function Login(props) {
           setUserName(res.data.data[0].name)
           setIsLogin(true)
           setIsAdminLogin(false)
+          localStorage.setItem('isLogin', 'true');
+          localStorage.setItem('userId', res.data.data[0].employeeId);
+          localStorage.setItem('userName', res.data.data[0].name);
+          localStorage.setItem('userEmail', res.data.data[0].email);
+          localStorage.setItem('password', res.data.data[0].password);
           navigate('/employee/reimbursement')
         }
       })

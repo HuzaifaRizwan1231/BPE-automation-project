@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 import Navbar from './components/Navbar'
@@ -20,6 +20,25 @@ function App() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    if (localStorage.getItem("isLogin") === "true") {
+      setUserId(localStorage.getItem("userId"));
+      setUserName(localStorage.getItem("userName"));
+      setUserEmail(localStorage.getItem("userEmail"));
+      setPassword(localStorage.getItem("password"));
+      setIsLogin(true);
+    }
+
+    if (localStorage.getItem("isAdminLogin") === "true") {
+      setUserName(localStorage.getItem("userName"));
+      setUserEmail(localStorage.getItem("userEmail"));
+      setPassword(localStorage.getItem("password"));
+      setIsAdminLogin(true);
+    }
+  
+   
+  }, [])
+  
 
 
   return (

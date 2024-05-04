@@ -1,8 +1,10 @@
 //Initializing server
-
 const express = require("express");
 const db = require("./config/db.js");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 
@@ -10,6 +12,7 @@ const PORT = 3002;
 
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload());
 
 //Queries
 
@@ -62,7 +65,7 @@ app.get("/reimbursements", (req, res) => {
 
 // GET EMPLOYEE REIMBURSEMENTS
 app.post("/employee_reimbursements", (req, res) => {
-  const  userId = req.body.userId;
+  const userId = req.body.userId;
   db.query(
     "SELECT * FROM Reimbursement WHERE employeeId = ? ORDER BY status",
     [userId],
@@ -78,23 +81,51 @@ app.post("/employee_reimbursements", (req, res) => {
 
 // RAISE NEW REIMBURSEMENT APPLICATION
 app.post("/insert_reimbursement", (req, res) => {
-  const { image, amount, userId, status, type, description } = req.body;
-  const insertQuery =
-    "INSERT INTO Reimbursement (image, amount, employeeId, status, type, description) VALUES (?, ?, ?, ?, ?, ?)";
+  const { amount, userId, status, type, description } = req.body;
 
-  db.query(
-    insertQuery,
-    [image, amount, userId, status, type, description],
-    (err, result) => {
-      if (err) {
-        console.error("Error inserting reimbursement:", err);
-        res.status(500).json({ error: "Failed to insert reimbursement" });
-      } else {
-        console.log("Reimbursement inserted successfully");
-        res.json({ message: "Reimbursement inserted successfully" });
-      }
+  // If no file is uploaded
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send("No files were uploaded.");
+  }
+
+  const file = req.files.file;
+
+  // Define destination folder and new filename
+  const destinationFolder = "../src/images/ReimbursementImages";
+
+  //Renaming the file according to the current timestamp
+  const originalFileName = file.name;
+  const timeStamp = Date.now();
+  const newFileName = `${timeStamp}_${originalFileName}`;
+
+  //move the file to the specific folder
+  file.mv(path.join(destinationFolder, newFileName), (err) => {
+    if (err) {
+      console.log("----------------------------------");
+      console.log("not moved");
+      console.log(err.message);
+
+      return res.status(500).send(err);
     }
-  );
+
+    //Inserting the file name into the database
+    const insertQuery =
+      "INSERT INTO Reimbursement (image, amount, employeeId, status, type, description) VALUES (?, ?, ?, ?, ?, ?)";
+
+    db.query(
+      insertQuery,
+      [newFileName, amount, userId, status, type, description],
+      (err, result) => {
+        if (err) {
+          console.error("Error inserting reimbursement:", err);
+          res.status(500).json({ error: "Failed to insert reimbursement" });
+        } else {
+          console.log("Reimbursement inserted successfully");
+          res.json({ message: "Reimbursement inserted successfully" });
+        }
+      }
+    );
+  });
 });
 
 // UPDATE REIMBURSEMENT STATUS
@@ -119,8 +150,8 @@ app.post("/update_reimbursement", (req, res) => {
 // GET PROJECTS TO TRANSFER TO
 app.post("/projects", (req, res) => {
   let exceptionId = req.body.exceptionId;
-  if(exceptionId==null){
-    exceptionId = "NULL"
+  if (exceptionId == null) {
+    exceptionId = "NULL";
   }
   db.query(
     "SELECT * FROM Project WHERE projectId != ?",

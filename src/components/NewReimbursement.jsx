@@ -3,9 +3,9 @@ import React, { useState } from "react";
 
 export default function NewReimbursement(props) {
 
-  const {ip, userId,FetchReimbursements} = props;
+  const {ip, userId,FetchReimbursements, showForm, setShowForm} = props;
 
-  const [image, setImage] = useState("test.png")
+  const [file, setfile] = useState(null)
   const [amount, setAmount] = useState(0)
   const [type, setType] = useState("medical")
   const [description, setDescription] = useState("")
@@ -14,14 +14,28 @@ export default function NewReimbursement(props) {
   const raiseReimbursement = (event)=>{
     event.preventDefault();
 
-    //RAISING NEW REIMBURSEMENT
-    axios.post(`${ip}/insert_reimbursement`, {image, amount, userId, status:"Pending", type, description})
-    .then((res)=>console.log(res.data), FetchReimbursements())
+    setShowForm(false);
+    // appending the file in formData
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('amount', amount);
+    formData.append('userId', userId);
+    formData.append('status', 'Pending');
+    formData.append('type', type);
+    formData.append('description', description);
+
+      //RAISING NEW REIMBURSEMENT
+    axios.post(`${ip}/insert_reimbursement`, formData)
+    .then((res)=>{
+      console.log(res.data);
+      FetchReimbursements();
+    }
+    )
   }
 
   return (
     <>
-      <div className={`fixed-form ${props.showForm ? "block" : "hidden"}`}>
+      <div className={`fixed-form ${showForm ? "block" : "hidden"}`}>
         <h6 class="form-title mb-4 font-bold">New Reimbursement</h6>
         <div className="form-wrapper">
           <form class="max-w-md mx-auto" onSubmit={raiseReimbursement}>
@@ -55,7 +69,10 @@ export default function NewReimbursement(props) {
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" />
+                    <input onChange={(e)=>{
+                              setfile(e.target.files[0])
+                          }}
+                    id="dropzone-file" type="file" class="" />
                 </label>
             </div> 
 
@@ -64,7 +81,7 @@ export default function NewReimbursement(props) {
             
             <a
             onClick={() => {
-                props.setShowForm(false);
+                setShowForm(false);
               }}
               
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
