@@ -1,10 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TaxTable from '../components/TaxTable'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Tax(props) {
   
-  const {userEmail}=props;
+  const {userEmail, ip}=props;
+
+  const [employees, setEmployees] = useState([])
+
+  const fetchResources = ()=>{
+    // Fetching employee data table
+      axios.get(`${ip}/employee`)
+      .then((res)=>setEmployees(res.data.result))
+      .catch((err)=>console.log(err)) 
+  }
+
   const navigate = useNavigate();
   useEffect(() => {
     if (userEmail == ""){
@@ -27,7 +38,7 @@ export default function Tax(props) {
               </button>
             </div>
             <div className="page-table">
-              <TaxTable/>
+              <TaxTable employees={employees} fetchResources={fetchResources}/>
             </div>
           </div>
         </div>
