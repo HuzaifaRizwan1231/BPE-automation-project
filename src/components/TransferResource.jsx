@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 export default function TransferResource(props) {
 
-    const {ip, eName, eId, eProjectId, projects, fetchResources} = props;
+    const {ip, eName, eId, eProjectId, projects, fetchResources, eProjectName} = props;
 
     const [transferToId, setTransferToId] = useState()
       
@@ -15,6 +15,7 @@ export default function TransferResource(props) {
         .catch((err)=>console.log(err))   
 
         props.setShowForm(false);
+        
     }
 
   return (
@@ -33,13 +34,18 @@ export default function TransferResource(props) {
 
             </div>
             <div className="w-1/2">
-            <h6 class="transfer-tag mb-2">Current Project</h6>
-            <h6 class="transfer-value mb-2">{eProjectId == null ? "Not Assigned":eProjectId}</h6>
+            <h6 class="transfer-tag mb-2">Current Project ID</h6>
+            <h6 class="transfer-value mb-2">{eProjectId == 0 ? "Not Assigned":eProjectId}</h6>
+
+            </div>
+            <div className="w-1/2">
+            <h6 class="transfer-tag mb-2">Current Project Name</h6>
+            <h6 class="transfer-value mb-2">{eProjectId == 0 ? "Not Assigned":eProjectName}</h6>
 
             </div>
             <div className="w-full">
 
-            <h6 class="transfer-tag">Transfer To</h6>
+            <h6 class="transfer-tag">Assign To</h6>
 
           <form class="transfer-project-field max-w-md mx-auto" onSubmit={transferResource}>
             <div class="relative z-0 w-full mb-5 group">
@@ -47,7 +53,7 @@ export default function TransferResource(props) {
                 setTransferToId(e.target.value)
                 }}required>
                     {projects.map((project)=>(
-                        <option value={project.projectId}  selected >{project.projectId}</option>
+                        <option value={project.projectId} >{project.projectId==0 ? "Un Assign Project": `Id: ${project.projectId} | Name: ${project.pName}`}</option>
                     ))}
                 </select>
               
@@ -66,6 +72,8 @@ export default function TransferResource(props) {
             >
               Cancel
             </a>
+            
+           
             <button
               type="submit"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

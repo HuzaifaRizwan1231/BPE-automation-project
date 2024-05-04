@@ -15,6 +15,7 @@ export default function Resource(props) {
   const [eProjectId, setEProjectId] = useState()
   const [projects, setProjects] = useState([])
   const [employees, setEmployees] = useState([])
+  const [eProjectName, setEProjectName] = useState()
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -24,15 +25,15 @@ export default function Resource(props) {
   }, [])
 
   const fetchResources = ()=>{
-    // Fetching reimbursements data table
-      axios.get(`${ip}/employee`)
+    // Fetching employee data table
+      axios.get(`${ip}/employee_projects`)
       .then((res)=>setEmployees(res.data.result))
       .catch((err)=>console.log(err)) 
   }
 
 
-  const fetchProjects = ()=>{
-    axios.post(`${ip}/projects`, {exceptionId:eProjectId})
+  const fetchProjects = (id)=>{
+    axios.post(`${ip}/projects`, {exceptionId:id})
     .then((res)=>{console.log(res.data.result); setProjects(res.data.result)})
     .catch((err)=>console.log(err))
 }
@@ -55,13 +56,13 @@ export default function Resource(props) {
               </button> */}
             </div>
             <div className="page-table">
-              <ResourceTable ip={ip} setShowForm={setShowForm} setEId={setEId} setEName={setEName} setEProjectId={setEProjectId} fetchProjects={fetchProjects} fetchResources={fetchResources} employees={employees}/>
+              <ResourceTable ip={ip} setEProjectName={setEProjectName} setShowForm={setShowForm} setEId={setEId} setEName={setEName} setEProjectId={setEProjectId} fetchProjects={fetchProjects} fetchResources={fetchResources} employees={employees}/>
             </div>
           </div>
         </div>
       </div>
 
-      <TransferResource fetchResources={fetchResources} projects={projects} eId={eId} eName={eName} eProjectId={eProjectId} showForm={showForm} setShowForm={setShowForm} ip={ip}/>
+      <TransferResource fetchResources={fetchResources} eProjectName={eProjectName} projects={projects} eId={eId} eName={eName} eProjectId={eProjectId} showForm={showForm} setShowForm={setShowForm} ip={ip}/>
     </>
   );
 }

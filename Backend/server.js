@@ -49,6 +49,21 @@ app.get("/employee", (req, res) => {
   });
 });
 
+// GET EMPLOYEE WITH PROJECTS
+app.get("/employee_projects", (req, res) => {
+  db.query(
+    "SELECT * FROM employee JOIN Project ON employee.projectId = Project.projectId",
+    (err, result) => {
+      if (err) {
+        return res.json(err);
+      } else {
+        console.log(result)
+        return res.json({ result });
+      }
+    }
+  );
+});
+
 // GET PENDING REIMBURSEMENTS
 app.get("/reimbursements", (req, res) => {
   db.query(
@@ -171,17 +186,29 @@ app.put("/update_project", (req, res) => {
   const eId = req.body.eId;
   const transferToId = req.body.transferToId; // Assuming the project ID is provided in the request body
 
+  let sql;
   // Query to update project ID of an employee
-  const sql = "UPDATE employee SET projectId = ? WHERE employeeId = ?";
-
-  // Execute query
-  db.query(sql, [transferToId, eId], (err, result) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-    } else {
-      res.json({ message: "Project ID updated successfully" });
-    }
-  });
+  if (transferToId == "NULL") {
+    sql = "UPDATE employee SET projectId = NULL WHERE employeeId = ?";
+    // Execute query
+    db.query(sql, [eId], (err, result) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json({ message: "Project ID updated successfully" });
+      }
+    });
+  } else {
+    sql = "UPDATE employee SET projectId = ? WHERE employeeId = ?";
+    // Execute query
+    db.query(sql, [transferToId, eId], (err, result) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json({ message: "Project ID updated successfully" });
+      }
+    });
+  }
 });
 
 //Listening

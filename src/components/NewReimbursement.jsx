@@ -25,7 +25,7 @@ export default function NewReimbursement(props) {
     formData.append('type', type);
     formData.append('description', description);
 
-      //RAISING NEW REIMBURSEMENT
+    //RAISING NEW REIMBURSEMENT
     axios.post(`${ip}/insert_reimbursement`, formData)
     .then((res)=>{
       console.log(res.data);

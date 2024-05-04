@@ -5,19 +5,20 @@ import React, { useEffect, useState } from "react";
 export default function ResourceTable(props) {
 
   // USESTATES
-  const {ip, setShowForm ,setEId, setEName, setEProjectId, fetchProjects, fetchResources, employees} = props;
+  const {ip, setShowForm ,setEId, setEName, setEProjectId, fetchProjects, fetchResources, employees, setEProjectName} = props;
 
   useEffect(() => {
       fetchResources();  
   }, [])
 
   
-  const openTransferResourceForm = async (id, name, projectId)=>{
+  const openTransferResourceForm = async (id, name, projectId, projectName)=>{
     await setEId(id);
     await setEName(name);
     await setEProjectId(projectId);
     await setShowForm(true);
-    fetchProjects();
+    await setEProjectName(projectName);
+    await fetchProjects(projectId);
   }
 
   return (
@@ -75,14 +76,14 @@ export default function ResourceTable(props) {
                     {employee.reimbursementAmount}
                     </td>
                     <td class="px-6 py-4">
-                    {employee.projectId == null ? "NULL": employee.projectId}
+                    {employee.projectId == 0 ? "Not Assigned": employee.projectId}
                     </td>
                     <td class="px-6 py-4">
                     {employee.position}
                     </td>
                     <td class="px-6 py-4">
                         <a onClick={()=>{
-                    openTransferResourceForm(employee.employeeId, employee.name, employee.projectId);
+                    openTransferResourceForm(employee.employeeId, employee.name, employee.projectId, employee.pName);
                   }} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Transfer</a>
                     </td>
                 </tr>
