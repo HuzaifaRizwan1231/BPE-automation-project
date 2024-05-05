@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import TaxTable from '../components/TaxTable'
+import TaxTable from '../components/Tax/TaxTable'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CSVLink } from "react-csv"; 
