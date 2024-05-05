@@ -49,6 +49,35 @@ app.get("/employee", (req, res) => {
   });
 });
 
+//ADD EMPLOYEE
+app.post("/add_employee", (req, res) => {
+
+  const {eName, eEmail, ePassword, eSalary, eReimbursementAmount, ePosition} = req.body;
+
+  // Checking for unique email
+  let numOfRows;
+  db.query("SELECT * FROM employee WHERE userEmail = ?",[eEmail], (err, result) => {
+      numOfRows = result.length;
+      console.log(numOfRows);
+      if (err) {
+        return res.json("Error");
+      } else if (numOfRows == 1) {
+        return res.json("Email Already Exists");
+      } else {
+        db.query("INSERT INTO employee (name, salary, userEmail, password, reimbursementAmount, projectId, position) VALUES (?,?,?,?,?,0,?)",[eName,eSalary, eEmail, ePassword, eReimbursementAmount, ePosition], (err, result) => {
+          if (err) {
+            return res.json(err);
+          } else {
+            return res.json("Employee Added Successfully");
+          }
+        });
+      }
+  });
+
+
+  
+});
+
 // UPDATE EMPLOYEE REIMBURSEMENT AMOUNT
 app.post("/update_employee_remaining_amount", (req, res) => {
   const userId = req.body.userId;

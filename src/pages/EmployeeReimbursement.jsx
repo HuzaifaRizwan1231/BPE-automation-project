@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import NewReimbursement from '../components/NewReimbursement';
-import EmployeeReimbursementTable from '../components/EmployeeReimbursementTable';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import EmployeeReimbursementTable from '../components/EmployeeReimbursement/EmployeeReimbursementTable';
+import NewReimbursement from '../components/EmployeeReimbursement/NewReimbursement';
 
 export default function EmployeeReimbursement(props) {
  

@@ -68,6 +68,14 @@ export default function SecondSidebar(props) {
                   <p>Resource Allocation</p>
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="hr/add_employee"
+                  class="flex p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                >
+                  <p>Add Employee</p>
+                </Link>
+              </li>
             </>
             }
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import ResourceTable from "../components/ResourceTable";
-import TransferResource from "../components/TransferResource";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ResourceTable from "../components/Resource/ResourceTable";
+import TransferResource from "../components/Resource/TransferResource";
 
 export default function Resource(props) {
 

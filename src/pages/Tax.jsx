@@ -92,7 +92,7 @@ export default function Tax(props) {
                 </h6>
               </div>
               <button className="button reimbursement-button">
-              <CSVLink data={data} headers={headers} filename={fileName}>Generate Tax</CSVLink>;
+              <CSVLink data={data} headers={headers} filename={fileName}>Generate Tax</CSVLink>
               </button>
             </div>
             <div className="page-table">
