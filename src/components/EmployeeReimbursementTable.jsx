@@ -81,23 +81,15 @@ export default function EmployeeReimbursementTable(props) {
           </tbody>
       </table>
   
-      <nav class="pagination flex items-center flex-column flex-wrap md:flex-row justify-between py-1" aria-label="Table navigation">
-          <span class=" font-normal text-gray-500 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-gray-900">1-10</span> of <span class="font-semibold text-gray-900">1000</span></span>
-          <ul class="inline-flex -space-x-px rtl:space-x-reverse  h-8">
-              <li>
-                  <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight">|</a>
-              </li>
-              <li>
-                  <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight">4</a>
-              </li>
-              <li>
-                  <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight">5</a>
-              </li>
-              <li>
-          <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight rounded-e-lg">|</a>
-              </li>
-          </ul>
-      </nav>
+      {reimbursements.length != 0 &&
+    <nav class="pagination h-12 flex items-center flex-column flex-wrap md:flex-row justify-between py-1" aria-label="Table navigation">
+        <span class=" font-normal text-gray-500 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-gray-900">{reimbursements.length}</span> records </span>
+    </nav>
+    }
+
+    {reimbursements.length == 0 &&
+        <div className='text-center text-sm px-6 py-10 font-medium text-gray-900 whitespace-nowrap'><h2>There are no records to display</h2></div>
+    }
   </div>
   
       </>
