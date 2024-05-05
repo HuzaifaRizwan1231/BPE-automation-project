@@ -303,3 +303,13 @@
     font-weight: 500 !important;
 }
 
+.reimbursement-status{
+    margin: 0px;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    word-break: break-word;
+    font-family: "DM Sans" !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+}
+

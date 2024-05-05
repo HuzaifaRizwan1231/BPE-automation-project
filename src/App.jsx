@@ -9,6 +9,7 @@ import Tax from './pages/Tax';
 import Login from './pages/Login';
 import EmployeeReimbursement from './pages/EmployeeReimbursement';
 import AddEmployee from './pages/AddEmployee';
+import ReimbursementHistory from './pages/ReimbursementHistory';
 
 function App() {
   const ip = "http://localhost:3002";
@@ -62,6 +63,11 @@ function App() {
         <Route
             path="/hr/reimbursement"
             element={<Reimbursement ip={ip} userEmail={userEmail}/>}
+        />
+
+        <Route
+            path="/hr/reimbursement_history"
+            element={<ReimbursementHistory ip={ip} userEmail={userEmail}/>}
         />
 
         <Route

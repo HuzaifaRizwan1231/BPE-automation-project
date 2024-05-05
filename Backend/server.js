@@ -124,6 +124,20 @@ app.get("/reimbursements", (req, res) => {
   );
 });
 
+// GET HISTORY OF REIMBURSEMENTS ALONG WITH EMPLOYEE INFORMATION
+app.get("/reimbursements_history", (req, res) => {
+  db.query(
+    "SELECT * FROM Reimbursement JOIN employee ON employee.employeeId = Reimbursement.employeeId WHERE status != 'Pending' ORDER BY amount desc",
+    (error, result) => {
+      if (error) {
+        return res.json(error);
+      } else {
+        return res.json({ result });
+      }
+    }
+  );
+});
+
 // GET EMPLOYEE REIMBURSEMENTS
 app.post("/employee_reimbursements", (req, res) => {
   const userId = req.body.userId;
