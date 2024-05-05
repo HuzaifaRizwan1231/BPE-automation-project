@@ -28,28 +28,26 @@ export default function ResourceTable(props) {
         <thead class="text-gray-700 bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Employee ID
+                    ID
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Name
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Email
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Salary
                 </th>
+                
                 <th scope="col" class="px-6 py-3">
-                    userName
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Password
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Amount
+                    Position
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Project
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Position
+                    Action
                 </th>
             </tr>
         </thead>
@@ -64,23 +62,19 @@ export default function ResourceTable(props) {
                         {employee.name}
                     </td>
                     <td class="px-6 py-4">
-                    {employee.salary}
-                    </td>
-                    <td class="px-6 py-4">
                     {employee.userEmail}
                     </td>
                     <td class="px-6 py-4">
-                    {employee.password}
+                    PKR {employee.salary}
                     </td>
                     <td class="px-6 py-4">
-                    {employee.reimbursementAmount}
+                        <div className="status-badge status-badge-approve text-center ">{employee.position}</div>
                     </td>
-                    <td class="px-6 py-4">
-                    {employee.projectId == 0 ? "Not Assigned": employee.projectId}
+                   
+                        <td class="px-6 py-4">
+                    {employee.projectId == 0 ? "Not Assigned": employee.pName}
                     </td>
-                    <td class="px-6 py-4">
-                    {employee.position}
-                    </td>
+                    
                     <td class="px-6 py-4">
                         <a onClick={()=>{
                     openTransferResourceForm(employee.employeeId, employee.name, employee.projectId, employee.pName);

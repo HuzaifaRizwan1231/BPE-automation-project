@@ -132,6 +132,32 @@
     border-radius: 1rem;
 }
 
+.status-badge{
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    padding: 4px 1rem;
+    text-transform: capitalize !important;
+    border-radius: 50px;
+}
+
+.status-badge-approve{
+    background-color: #f5fef8 !important;
+    border: 1px solid #34a153;
+    color: #34a153;
+}
+
+.status-badge-pending{
+    background-color: #f5fef8 !important;
+    border: 1px solid #ffa600;
+    color: #ffa600;
+}
+
+.status-badge-reject{
+    background-color: #f5fef8 !important;
+    border: 1px solid red;
+    color: red;
+}
+
 .pagination{
     padding-left: 8px;
     padding-right: 8px;

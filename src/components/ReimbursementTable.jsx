@@ -32,23 +32,31 @@ export default function (props) {
         <thead class="text-gray-700 bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Reibursement ID
+                    ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Email
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Amount
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Description
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Type
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Employee ID
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Description
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+                
+                
                 
             </tr>
         </thead>
@@ -60,20 +68,27 @@ export default function (props) {
                         {reimbursement.reimbursementId}
                     </th>
                     <td class="px-6 py-4">
-                    {reimbursement.amount}
+                    {reimbursement.name}
+                    </td>
+                    <td class="px-6 py-4">
+                    {reimbursement.userEmail}
+                    </td>
+                    <td class="px-6 py-4">
+                    PKR {reimbursement.amount}
+                    </td>
+                    <td class="px-6 py-4">
+                    {reimbursement.type == "gym" && <><i class="fa-solid fa-dumbbell"></i> Gym</>}
+                    {reimbursement.type == "medical" && <><i class="fa-solid fa-notes-medical"></i> Medical</>}
+                    </td>
+                    <td class="px-6 py-4">
+                    <div className={`status-badge status-badge-${reimbursement.status == "Pending" ? "pending" : reimbursement.status == "Approved" ? "approve" : "reject"} text-center`}>{reimbursement.status}</div>
                     </td>
                     <td class="px-6 py-4">
                     {reimbursement.description}
                     </td>
-                    <td class="px-6 py-4">
-                    {reimbursement.type}
-                    </td>
-                    <td class="px-6 py-4">
-                    {reimbursement.employeeId}
-                    </td>
-                    <td class="px-6 py-4">
-                    {reimbursement.status}
-                    </td>
+                    
+                    
+                    
                     <td class="px-6 py-4">
                         <a onClick={()=>openReimbursementDetails(reimbursement.reimbursementId, reimbursement.amount, reimbursement.type, reimbursement.employeeId, reimbursement.description, reimbursement.image, reimbursement.name, reimbursement.reimbursementAmount)}  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a>
                     </td>

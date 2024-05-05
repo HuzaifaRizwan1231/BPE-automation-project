@@ -21,25 +21,25 @@ export default function EmployeeReimbursementTable(props) {
               <tr>
                   
                   <th scope="col" class="px-6 py-3">
-                      Reibursement ID
+                      ID
                   </th>
                   <th scope="col" class="px-6 py-3">
-                      Image
+                      Name
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Email
                   </th>
                   <th scope="col" class="px-6 py-3">
                       Amount
                   </th>
                   <th scope="col" class="px-6 py-3">
-                      Description
-                  </th>
-                  <th scope="col" class="px-6 py-3">
                       Type
                   </th>
                   <th scope="col" class="px-6 py-3">
-                      Employee ID
+                      Status
                   </th>
                   <th scope="col" class="px-6 py-3">
-                      Status
+                      Description
                   </th>
               </tr>
           </thead>
@@ -52,23 +52,26 @@ export default function EmployeeReimbursementTable(props) {
                           {reimbursement.reimbursementId}
                       </th>
                       <td class="px-6 py-4">
-                          {reimbursement.image}
+                      {reimbursement.name}
                       </td>
                       <td class="px-6 py-4">
-                      {reimbursement.amount}
+                      {reimbursement.userEmail}
+                      </td>
+                      <td class="px-6 py-4">PKR {reimbursement.amount}
+                      </td>
+                      <td class="px-6 py-4">
+                      {reimbursement.type == "gym" && <><i class="fa-solid fa-dumbbell"></i> Gym</>}
+                      {reimbursement.type == "medical" && <><i class="fa-solid fa-notes-medical"></i> Medical</>}
+                      </td>
+                      <td class="px-6 py-4">
+                      <div className={`status-badge status-badge-${reimbursement.status == "Pending" ? "pending" : reimbursement.status == "Approved" ? "approve" : "reject"} text-center`}>{reimbursement.status}</div>
                       </td>
                       <td class="px-6 py-4">
                       {reimbursement.description}
                       </td>
-                      <td class="px-6 py-4">
-                      {reimbursement.type}
-                      </td>
-                      <td class="px-6 py-4">
-                      {reimbursement.employeeId}
-                      </td>
-                      <td class="px-6 py-4">
-                      {reimbursement.status}
-                      </td>
+                      
+
+                      
                       {/* <td class="px-6 py-4">
                           <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                       </td> */}

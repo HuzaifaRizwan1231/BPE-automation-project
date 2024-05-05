@@ -81,7 +81,7 @@ app.get("/employee_projects", (req, res) => {
   );
 });
 
-// GET PENDING REIMBURSEMENTS
+// GET PENDING REIMBURSEMENTS ALONG WITH EMPLOYEE INFORMATION
 app.get("/reimbursements", (req, res) => {
   db.query(
     "SELECT * FROM Reimbursement JOIN employee ON employee.employeeId = Reimbursement.employeeId WHERE status = 'Pending' ORDER BY amount desc",
@@ -99,7 +99,7 @@ app.get("/reimbursements", (req, res) => {
 app.post("/employee_reimbursements", (req, res) => {
   const userId = req.body.userId;
   db.query(
-    "SELECT * FROM Reimbursement WHERE employeeId = ? ORDER BY status",
+    "SELECT * FROM Reimbursement JOIN employee ON employee.employeeId = Reimbursement.employeeId WHERE employee.employeeId = ? ORDER BY status",
     [userId],
     (error, result) => {
       if (error) {
