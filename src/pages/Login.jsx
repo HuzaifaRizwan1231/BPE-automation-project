@@ -6,6 +6,8 @@ export default function Login(props) {
 
   const navigate = useNavigate();
 
+  const [returnMessage, setReturnMessage] = useState("");
+
   const {ip, setUserId, userId, setIsAdminLogin, setIsLogin, setUserName, setUserEmail, setPassword, userEmail, userName, password}=props;
 
   const handleLogin = (event)=>{
@@ -31,7 +33,7 @@ export default function Login(props) {
           console.log(res.data)
         }
         else if(res.data == "Incorrect Email or Password"){
-          console.log(res.data)
+          setReturnMessage(res.data);
         }
         else{
           setUserId(res.data.data[0].employeeId)
@@ -109,6 +111,9 @@ export default function Login(props) {
                           />
                         </div>
                       </div>
+                      {returnMessage == "Incorrect Email or Password" &&  <div className="w-full mt-4">
+                          <h6 class="employee-exists mb-2">* {returnMessage}</h6>
+                      </div>}
 
                       <div class="flex extra-fields">
                         <div class="mt-2 items-center justify-between">
