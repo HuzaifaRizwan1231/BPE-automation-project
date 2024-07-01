@@ -15,7 +15,7 @@ export default function Login(props) {
     event.preventDefault();
     
     if (userEmail == "hrAdmin@gmail.com" && password=="admin123"){
-      localStorage.setItem('isAdminLogin', 'true');
+      localStorage.setItem('isLogin', 'true');
       localStorage.setItem('userName', 'HR Admin');
       localStorage.setItem('userEmail', 'hrAdmin@gmail.com');
       localStorage.setItem('password', 'admin123');
