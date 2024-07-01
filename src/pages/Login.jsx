@@ -42,9 +42,9 @@ export default function Login(props) {
           setIsAdminLogin(false)
           localStorage.setItem('isLogin', 'true');
           localStorage.setItem('userId', res.data.data[0].employeeId);
-          localStorage.setItem('userName', res.data.data[0].name);
-          localStorage.setItem('userEmail', res.data.data[0].email);
-          localStorage.setItem('password', res.data.data[0].password);
+          localStorage.setItem('userName', JSON.stringify(res.data.data[0].name));
+          localStorage.setItem('userEmail', JSON.stringify(res.data.data[0].userEmail) );
+          localStorage.setItem('password', JSON.stringify(res.data.data[0].password));
           navigate('/employee/reimbursement')
         }
       })
@@ -66,7 +66,7 @@ export default function Login(props) {
           <div className="w-2/3">
             <div className="login-main">
               <div className="main-wrapper">
-                <div className="page-content">
+                <div className="page-content flex flex-col items-center justify-center">
                   <div className="login-form-wrapper">
                     <div className="login-form-wrapper-inside">
                       <h1 className="title font-bold">

@@ -20,7 +20,7 @@ export default function EmployeeReimbursement(props) {
     }
 
     useEffect(() => {
-      if (userEmail == ""){
+      if (localStorage.getItem("isLogin")!="true"){
         navigate("/auth/login")
       }      
     }, [])

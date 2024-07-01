@@ -49,9 +49,9 @@ export default function Reimbursement(props) {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (userEmail == ""){
+    if (localStorage.getItem("isLogin")!="true"){
       navigate("/auth/login")
-    }       
+    }      
   }, [])
   
   return (

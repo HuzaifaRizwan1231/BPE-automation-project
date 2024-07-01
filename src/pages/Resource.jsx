@@ -19,9 +19,9 @@ export default function Resource(props) {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (userEmail == ""){
+    if (localStorage.getItem("isLogin")!="true"){
       navigate("/auth/login")
-    }       
+    }      
   }, [])
 
   const fetchResources = ()=>{

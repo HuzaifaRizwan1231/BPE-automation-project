@@ -76,9 +76,9 @@ export default function Tax(props) {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (userEmail == ""){
+    if (localStorage.getItem("isLogin")!="true"){
       navigate("/auth/login")
-    }       
+    }      
   }, [])
   return (
     <>
